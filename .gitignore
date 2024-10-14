@@ -1,0 +1,9 @@
+client/node_modules
+client/dist/
+client/.env
+client/.env.local
+server/node_modules
+server/dist/
+server/.env
+client/.next/
+.vscode
