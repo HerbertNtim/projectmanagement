@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import projectRouter from './routes/projectRoutes';
 // ROUTE IMPORTS
 
 // CONFIGURATION
@@ -18,9 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 // ROUTES
-app.get('/', (req, res) => {
-  res.send('Hello World');
-});
+app.use('/projects', projectRouter);
 
 // SERVER
 const PORT = process.env.PORT || 5000;
