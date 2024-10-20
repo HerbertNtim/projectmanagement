@@ -50,7 +50,7 @@ const Navbar = () => {
         </button>
         <Link
           href={"/settings"}
-          className="h-min w-min rounded p-2 hover:bg-gray-100"
+          className="h-min w-min rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-900"
         >
           <Settings className="h-6 w-6 cursor-pointer dark:text-white" />
         </Link>

@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from "@/app/redux";
 import { setIsSidebarCollapsed } from "@/state";
+import { useGetProjectsQuery } from "@/state/api";
 import {
   AlertCircle,
   AlertOctagon,
@@ -7,6 +8,8 @@ import {
   Briefcase,
   ChevronDown,
   ChevronUp,
+  Cloud,
+  Cpu,
   Home,
   Layers3,
   LockIcon,
@@ -27,12 +30,25 @@ const Sidebar = () => {
   const [showProjects, setShowProjects] = useState(false);
   const [showPriority, setShowPriority] = useState(false);
 
+  const { data: projects } = useGetProjectsQuery();
+
   const dispatch = useAppDispatch();
   const isSidebarCollapsed = useAppSelector(
     (state) => state.global.isSidebarCollapsed,
   );
 
   const sidebarClassNames = `fixed flex flex-col h-[100%] justify-between shadow-xl transition-all duration-300 overflow-y-auto overflow-x-hidden w-64 bg-white dark:bg-dark-bg z-40 ${isSidebarCollapsed ? "w-0 hidden" : "w-64"}`;
+
+  // Define an array of icons for random selection
+  const projectIcons = [
+    Briefcase,
+    Cpu,
+    Cloud,
+    AlertCircle,
+    AlertOctagon,
+    ShieldAlert,
+    AlertTriangle
+  ];
 
   return (
     <div className={sidebarClassNames}>
@@ -86,6 +102,23 @@ const Sidebar = () => {
             <ChevronDown className="h-5 w-5" />
           )}
         </button>
+
+        {showProjects && (
+          <>
+            {projects?.map((project) => {
+              // Select a random icon from the projectIcons array
+              const RandomIcon = projectIcons[Math.floor(Math.random() * projectIcons.length)];
+              return (
+                <SidebarLink
+                  key={project.id}
+                  icon={RandomIcon} // Pass the random icon
+                  label={project.name}
+                  href={`/projects/${project.id}`}
+                />
+              );
+            })}
+          </>
+        )}
 
         {/* SHOW PRIORITY */}
         <button
