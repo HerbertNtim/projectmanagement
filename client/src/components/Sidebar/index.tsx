@@ -37,7 +37,7 @@ const Sidebar = () => {
     (state) => state.global.isSidebarCollapsed,
   );
 
-  const sidebarClassNames = `fixed flex flex-col h-[100%] justify-between shadow-xl transition-all duration-300 overflow-y-auto overflow-x-hidden w-64 bg-white dark:bg-dark-bg z-40 ${isSidebarCollapsed ? "w-0 hidden" : "w-64"}`;
+  const sidebarClassNames = `fixed flex flex-col h-[100%] justify-between shadow-xl transition-all duration-300 overflow-y-auto overflow-x-hidden w-64 bg-white dark:bg-dark-secondary z-40 ${isSidebarCollapsed ? "w-0 hidden" : "w-64"}`;
 
   // Define an array of icons for random selection
   const projectIcons = [
@@ -93,7 +93,7 @@ const Sidebar = () => {
         {/* SHOW PROJECTS */}
         <button
           onClick={() => setShowProjects(!showProjects)}
-          className="flex w-full cursor-pointer items-center justify-between px-8 py-4 text-lg font-medium"
+          className="flex w-full cursor-pointer items-center justify-between px-8 py-4 text-lg font-medium dark:text-neutral-200"
         >
           <span>Projects</span>
           {showProjects ? (
@@ -123,7 +123,7 @@ const Sidebar = () => {
         {/* SHOW PRIORITY */}
         <button
           onClick={() => setShowPriority(!showPriority)}
-          className="flex w-full cursor-pointer items-center justify-between px-8 py-4 text-lg font-medium"
+          className="flex w-full cursor-pointer items-center justify-between px-8 py-4 text-lg font-medium dark:text-white dark:bg-dark-tertiary"
         >
           <span>Priority</span>
           {showPriority ? (
