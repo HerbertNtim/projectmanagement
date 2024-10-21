@@ -1,3 +1,5 @@
+'use client'
+
 import { useAppSelector } from "@/app/redux";
 import { useGetTasksQuery } from "@/state/api";
 import { DisplayOption, Gantt, ViewMode } from "gantt-task-react";
@@ -5,13 +7,13 @@ import "gantt-task-react/dist/index.css";
 import React, { useMemo, useState } from "react";
 
 type Props = {
-  id: number;
+  id: string;
   setIsModalNewTaskOpen: (isOpen: boolean) => void;
 };
 
 type TaskTypeItems = "task" | "milestone" | "project";
 
-const TimelineView= ({ id, setIsModalNewTaskOpen }: Props) => {
+const Timeline = ({ id, setIsModalNewTaskOpen }: Props) => {
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
   const {
     data: tasks,
@@ -26,17 +28,21 @@ const TimelineView= ({ id, setIsModalNewTaskOpen }: Props) => {
 
   const ganttTasks = useMemo(() => {
     return (
-      tasks?.map((task) => ({
-        start: new Date(task.startDate as string),
-        end: new Date(task.dueDate as string),
-        name: task.title,
-        id: `Task-${task.id}`,
-        type: "task" as TaskTypeItems,
-        progress: task.points ? (task.points / 10) * 100 : 0,
-        isDisabled: false,
-      })) || []
+      tasks
+        ?.filter((task) => task.startDate && task.dueDate) // Ensure valid dates
+        .map((task) => ({
+          start: new Date(task.startDate as string),
+          end: new Date(task.dueDate as string),
+          name: task.title,
+          id: `Task-${task.id}`,
+          type: "task" as TaskTypeItems,
+          progress: task.points ? (task.points / 10) * 100 : 0,
+          isDisabled: false,
+        })) || []
     );
   }, [tasks]);
+
+  if(!ganttTasks) return <div>No Gnatt found</div>
 
   const handleViewModeChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
@@ -93,4 +99,4 @@ const TimelineView= ({ id, setIsModalNewTaskOpen }: Props) => {
   );
 };
 
-export default TimelineView;
+export default Timeline;
