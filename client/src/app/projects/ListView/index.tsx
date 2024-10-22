@@ -18,6 +18,12 @@ const ListView = ({ id, setIsModalNewTaskOpen }: Props) => {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>An error occurred while fetching tasks</div>;
 
+  if(!tasks?.length){
+    return <div className="flex flex-col items-center justify-center">
+      <p className="mt-20 text-7xl dark:text-neutral-300 font-bold">No Task found</p>
+    </div>
+  }
+
   return (
     <div className="px-4 pb-8 xl:px-6">
       <div className="pt-5">

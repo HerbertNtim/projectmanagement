@@ -42,7 +42,10 @@ const Timeline = ({ id, setIsModalNewTaskOpen }: Props) => {
     );
   }, [tasks]);
 
-  if(!ganttTasks) return <div>No Gnatt found</div>
+  if(ganttTasks.length < 1) return <div className="w-full h-full flex flex-col items-center justify-center">
+    <p className="text-center text-7xl mt-16 dark:text-neutral-300 font-bold">No Task added</p>
+    <p className="dark:text-neutral-300 text-2xl mt-8 leading-9">Add new task now!!</p>
+  </div>
 
   const handleViewModeChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
