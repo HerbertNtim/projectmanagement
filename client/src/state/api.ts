@@ -112,8 +112,11 @@ export const api = createApi({
         body: { status },
       }),
       invalidatesTags: (result, error, { taskId }) => [{ type: "Tasks", id: taskId }],
-    })
+    }),
+    search: build.query<SearchResults, string>({
+      query: (query) => `search?query=${query}`
+    }),
   }),
 });
 
-export const { useGetProjectsQuery, useCreateProjectMutation, useGetTasksQuery, useCreateTaskMutation, useUpdateTaskStatusMutation } = api;
+export const { useGetProjectsQuery, useCreateProjectMutation, useGetTasksQuery, useCreateTaskMutation, useUpdateTaskStatusMutation, useSearchQuery } = api;
