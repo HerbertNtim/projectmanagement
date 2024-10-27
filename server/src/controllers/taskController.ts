@@ -103,3 +103,33 @@ export const updateTask = async (req: Request, res: Response): Promise<void> => 
       .json({ message: "Error updating task", error: error.message });
   }
 };
+
+export const getUsersTasks = async (req: Request, res: Response): Promise<void> => {
+  const { userId } = req.params;
+  const parsedUserId = Number(userId);
+
+  // Validate if parsedUserId is a number
+  if (isNaN(parsedUserId)) {
+    res.status(400).json({ message: "Invalid userId parameter" });
+    return;
+  }
+
+  try {
+    const tasks = await prisma.task.findMany({
+      where: {
+        OR: [
+          { authorUserId: parsedUserId },
+          { assignedUserId: parsedUserId },
+        ],
+      },
+      include: {
+        author: true,
+        assignee: true,
+        comments: true,
+      },
+    });
+    res.status(200).json(tasks);
+  } catch (error: any) {
+    res.status(500).json({ message: "Error fetching user's tasks", error: error.message });
+  }
+};
