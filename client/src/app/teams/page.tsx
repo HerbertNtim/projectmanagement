@@ -34,8 +34,8 @@ const Teams = () => {
   const { data: teams, isLoading, isError } = useGetTeamsQuery();
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError || !teams) return <div>Error fetching teams</div>;
+  if (isLoading) return <div className="text-7xl text-center dark:text-white mt-24">Loading...</div>;
+  if (isError || !teams) return <div className="text-7xl text-center dark:text-white mt-24">Error fetching teams</div>;
 
   return (
     <div className="flex w-full flex-col p-8">

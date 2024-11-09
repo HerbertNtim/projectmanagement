@@ -41,9 +41,9 @@ const Timeline = () => {
     }));
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div className="text-7xl text-center dark:text-white mt-24">Loading...</div>;
   if (isError || !projects)
-    return <div>An error occurred while fetching projects</div>;
+    return <div className="text-7xl text-center dark:text-white mt-24">An error occurred while fetching projects</div>;
 
   return (
     <div className="max-w-full p-8">
