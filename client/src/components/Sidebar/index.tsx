@@ -68,7 +68,7 @@ const Sidebar = () => {
 
         {/* TEAM */}
         <div className="flex items-center gap-5 border-y-[1.5px] border-gray-200 px-4 py-5 dark:bg-dark-secondary dark:text-gray-200">
-          <Image src={"/logo.png"} width={40} height={40} alt="logo" />
+          <Image src={"https:pm-s3-pics.s3.us-east-2.amazonaws.com/logo.png"} width={40} height={40} alt="logo" />
           <div>
             <h3 className="text-md font-bold tracking-wide dark:text-gray-200">
               EURO TEAM
